@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.batteryjsontest">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Foreground service permissions -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -32,6 +31,11 @@
             android:name=".BatteryMonitorService"
             android:exported="false"
             android:foregroundServiceType="dataSync" />
+
+        <provider
+            android:name=".DeviceIdContentProvider"
+            android:authorities="com.example.batteryjsontest.deviceid"
+            android:exported="true" />
 
     </application>
 </manifest>

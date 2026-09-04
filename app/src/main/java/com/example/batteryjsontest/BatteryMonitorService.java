@@ -39,12 +39,12 @@ public class BatteryMonitorService extends Service {
     private static final String CHANNEL_ID = "battery_monitor_channel";
     private static final int NOTIF_ID = 1001;
 
-    // update every 5 seconds
-    private static final long INTERVAL_MS = 5_000L;
+    // update every 1 minute
+    private static final long INTERVAL_MS = 60_000L;
 
     // SOAP ASMX endpoint
     private static final String SOAP_URL =
-            "http://10.40.28.97:98/services/automation_smartcabinet.asmx";
+            "http://bkn1atm03s100/services/automation_smartcabinet.asmx";
     private static final String SOAP_ACTION =
             "http://tempuri.org/put_tab_charging_json";
 

@@ -25,6 +25,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Internal PDA install: no dedicated release keystore in this repo.
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
