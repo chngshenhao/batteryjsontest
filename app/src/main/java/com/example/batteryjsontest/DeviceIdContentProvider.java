@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /**
- * Exposes this app's Device ID (DEV-...) to other apps on the same device
+ * Exposes this device's system Device name as deviceNumber to other apps
  * (e.g. return_QR) via content://com.example.batteryjsontest.deviceid/device
  */
 public class DeviceIdContentProvider extends ContentProvider {

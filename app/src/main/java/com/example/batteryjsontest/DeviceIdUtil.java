@@ -1,39 +1,55 @@
 package com.example.batteryjsontest;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Build;
+import android.provider.Settings;
+import android.text.TextUtils;
+import android.util.Log;
 
-import androidx.annotation.RequiresApi;
-
-import java.util.Locale;
-import java.util.UUID;
-
+/**
+ * Resolves deviceNumber from the system "Device name" (Settings → About phone).
+ */
 public class DeviceIdUtil {
 
-    private static final String PREF = "pda_prefs";
-    private static final String KEY  = "device_number";
+    private static final String TAG = "DeviceIdUtil";
 
-    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     public static synchronized String getOrCreateDeviceNumber(Context ctx) {
-        SharedPreferences sp = ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE);
-        String existing = sp.getString(KEY, null);
+        String name = readSystemDeviceName(ctx);
+        if (!TextUtils.isEmpty(name)) {
+            return name.trim();
+        }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            if (existing != null && !existing.trim().isEmpty()) {
-                return existing;
+        // Fallback if Device name is unset
+        Log.w(TAG, "Device name empty; falling back to Build.MODEL");
+        if (!TextUtils.isEmpty(Build.MODEL)) {
+            return Build.MODEL.trim();
+        }
+        return "UNKNOWN";
+    }
+
+    private static String readSystemDeviceName(Context ctx) {
+        try {
+            // Same value shown as "Device name" in About phone (API 25+)
+            String global = Settings.Global.getString(
+                    ctx.getContentResolver(), Settings.Global.DEVICE_NAME);
+            if (!TextUtils.isEmpty(global)) {
+                return global;
             }
+        } catch (Exception e) {
+            Log.w(TAG, "Settings.Global.DEVICE_NAME failed: " + e.getMessage());
         }
 
-        String newId = "DEV-" + UUID.randomUUID().toString()
-                .replace("-", "")
-                .substring(0, 8)
-                .toUpperCase(Locale.US);
-
-        // commit() ensures it is written immediately (useful during testing)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            sp.edit().putString(KEY, newId).apply();
+        try {
+            // Some OEM builds expose the name under Secure
+            String secure = Settings.Secure.getString(
+                    ctx.getContentResolver(), "bluetooth_name");
+            if (!TextUtils.isEmpty(secure)) {
+                return secure;
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "bluetooth_name failed: " + e.getMessage());
         }
-        return newId;
+
+        return null;
     }
 }

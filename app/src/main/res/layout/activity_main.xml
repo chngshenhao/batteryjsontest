@@ -1,29 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Top bar: debug button top-right -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/btnDebug"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end|center_vertical"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/debug_content_description"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_debug" />
+    </FrameLayout>
+
+    <!-- User-facing content -->
+    <TextView
+        android:id="@+id/txtDeviceNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imgQr"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/qr_content_description"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/txtServiceStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtReturnHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:lineSpacingExtra="4dp"
+        android:textSize="14sp" />
+
+    <!-- Admin-only controls (hidden in user mode) -->
     <Button
         android:id="@+id/btnStart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start Service" />
+        android:layout_marginTop="16dp"
+        android:text="@string/start_service"
+        android:visibility="gone" />
 
     <Button
-        android:id="@+id/btnStop"
+        android:id="@+id/btnCheckUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Stop Service"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:text="@string/check_updates"
+        android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/txtOut"
+    <ScrollView
+        android:id="@+id/scrollDebug"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginTop="12dp"
-        android:textIsSelectable="true"
-        android:textSize="14sp" />
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/txtOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true"
+            android:textSize="13sp" />
+    </ScrollView>
+
 </LinearLayout>

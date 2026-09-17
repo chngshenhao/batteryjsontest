@@ -1,3 +1,31 @@
 <resources>
-    <string name="app_name">batteryjsontest</string>
+    <string name="app_name">PDA Agent</string>
+    <string name="debug_content_description">Debug / admin</string>
+    <string name="qr_content_description">Device number QR code</string>
+    <string name="service_online">Battery service: Online</string>
+    <string name="service_offline">Battery service: Offline</string>
+    <string name="return_hint_en">Please present the QR code or Device name when returning the PDA.</string>
+    <string name="return_hint_ms">Sila paparkan kod QR atau Nama Peranti semasa memulangkan PDA.</string>
+    <string name="admin_password_title">Admin access</string>
+    <string name="admin_password_hint">Enter admin password</string>
+    <string name="admin_password_wrong">Incorrect password</string>
+    <string name="admin_logout">Admin mode ended (idle timeout)</string>
+    <string name="start_service">Start Service</string>
+    <string name="check_updates">Check for updates</string>
+    <string name="device_label">Device: %1$s</string>
+    <string name="update_checking">Checking for updates…</string>
+    <string name="update_in_progress">Update already in progress</string>
+    <string name="update_up_to_date">PDA Agent is up to date</string>
+    <string name="update_check_failed">Update check failed: %1$s</string>
+    <string name="update_available_title">Update available</string>
+    <string name="update_available_message">New version %1$s (code %2$d) is available.\nDownload and install now?</string>
+    <string name="update_install">Install</string>
+    <string name="update_later">Later</string>
+    <string name="update_allow_unknown">Allow \"Install unknown apps\" for PDA Agent, then tap Check for updates again.</string>
+    <string name="install_permission_title">Allow app updates</string>
+    <string name="install_permission_message">PDA Agent needs permission to install updates from your company server.\n\nOn the next screen, enable \"Allow from this source\" for PDA Agent.\n\nPDA Agent memerlukan kebenaran untuk memasang kemaskini dari pelayan syarikat.\n\nPada skrin seterusnya, dayakan \"Benarkan dari sumber ini\" untuk PDA Agent.</string>
+    <string name="install_permission_open_settings">Open settings</string>
+    <string name="update_downloading">Downloading update…</string>
+    <string name="update_download_failed">Download failed: %1$s</string>
+    <string name="update_install_failed">Could not open installer: %1$s</string>
 </resources>

@@ -39,8 +39,8 @@ public class BatteryMonitorService extends Service {
     private static final String CHANNEL_ID = "battery_monitor_channel";
     private static final int NOTIF_ID = 1001;
 
-    // update every 1 minute
-    private static final long INTERVAL_MS = 60_000L;
+    // update every 30 seconds
+    private static final long INTERVAL_MS = 30_000L;
 
     // SOAP ASMX endpoint
     private static final String SOAP_URL =
@@ -55,9 +55,17 @@ public class BatteryMonitorService extends Service {
     private Handler handler;
     private ExecutorService netExec;
 
+    /** True while the foreground service instance is alive. */
+    private static volatile boolean running = false;
+
+    public static boolean isRunning() {
+        return running;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        running = true;
 
         handler = new Handler(Looper.getMainLooper());
         netExec = Executors.newSingleThreadExecutor();
@@ -113,6 +121,7 @@ public class BatteryMonitorService extends Service {
 
     @Override
     public void onDestroy() {
+        running = false;
         handler.removeCallbacks(loopTask);
         if (netExec != null) netExec.shutdownNow();
         Log.d(TAG, "Service destroyed");
